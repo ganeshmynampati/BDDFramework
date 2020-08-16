@@ -1,4 +1,4 @@
-Budget Application Automated Test Suite
+								BUDGET APPLICATION AUTOMATED SUITE
 
 OVERVIEW
 This repository consists of automated smoke scenario to hire a vehicle from Budget travels UI
