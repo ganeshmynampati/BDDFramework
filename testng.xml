@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<!--
-    <test name="APITest" preserve-order="true" junit="true">
-        <classes>
-            <class name="testrunner.PageRunner"/>
-        </classes>
-    </test> 
-    -->
-  
     <suite name="BDD Test Suite">
   <test name="Advisor Dashboard" preserve-order="true">
         <classes>

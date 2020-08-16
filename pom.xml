@@ -7,8 +7,8 @@
         <version>1.0</version>
     </parent>
     
-	<groupId>BDDFramework</groupId>
-	<artifactId>BDDFramework</artifactId>
+	<groupId>BudgetTravel</groupId>
+	<artifactId>BudgetTravel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>BDDFramework</name>
@@ -38,6 +38,12 @@
 			<version>1.2.5</version>
 		</dependency>
 		<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>4.1.0</version>
+    <scope>test</scope>
+</dependency>
+		<dependency>
     <groupId>jakarta.xml.bind</groupId>
     <artifactId>jakarta.xml.bind-api</artifactId>
     <version>2.3.2</version>
@@ -59,44 +65,18 @@
                 </exclusion>
             </exclusions>
 		</dependency>
-		
+		<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java8</artifactId>
+    <version>6.2.2</version>
+    <scope>test</scope>
+</dependency>
 		<dependency>
   			<groupId>org.slf4j</groupId>
  			 <artifactId>slf4j-simple</artifactId>
   			<version>1.7.21</version>
 			</dependency>
 			
-	   <dependency>
-                 <groupId>org.apache.poi</groupId>
-                 <artifactId>poi</artifactId>
-                 <version>4.1.0</version>
-          </dependency>
-          <dependency>
-                 <groupId>org.apache.poi</groupId>
-                 <artifactId>poi-ooxml</artifactId>
-                 <version>4.1.0</version>
-          </dependency>
-          <dependency>
-                 <groupId>org.apache.poi</groupId>
-                 <artifactId>poi-ooxml-schemas</artifactId>
-                 <version>4.1.0</version>
-          </dependency>
-          <dependency>
-                 <groupId>org.apache.poi</groupId>
-                 <artifactId>poi-scratchpad</artifactId>
-                 <version>4.1.0</version>
-          </dependency>
-          <dependency>
-                 <groupId>org.apache.poi</groupId>
-                 <artifactId>ooxml-schemas</artifactId>
-                 <version>1.4</version>
-          </dependency>
-
-          <dependency>
-                 <groupId>org.apache.poi</groupId>
-                 <artifactId>openxml4j</artifactId>
-                 <version>1.0-beta</version>
-          </dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
@@ -121,81 +101,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.java-json-tools</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>2.2.8</version>
-        </dependency> 
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-apache</artifactId>
-            <version>0.9.4</version>
-            <scope>test</scope>
-        </dependency>                                                                                   
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-junit4</artifactId>
-            <version>0.9.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-ui</artifactId>
-            <version>0.9.4</version>
-            <scope>test</scope>
-        </dependency> 
-        <dependency>
-            <groupId>com.github.java-json-tools</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>2.2.8</version>
-        </dependency> 
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-apache</artifactId>
-            <version>0.9.4</version>
-            <scope>test</scope>
-        </dependency>                                                                                   
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-junit4</artifactId>
-            <version>0.9.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-ui</artifactId>
-            <version>0.9.4</version>
-            <scope>test</scope>
-        </dependency>                
+        </dependency>            
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
             <version>3.13.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-broker</artifactId>
-            <version>${activemq.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-client</artifactId>
-            <version>${activemq.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-kahadb-store</artifactId>
-            <version>${activemq.version}</version>
-            <scope>test</scope>
-        </dependency>                
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jms_1.1_spec</artifactId>
-            <version>1.1.1</version>
             <scope>test</scope>
         </dependency>
 	</dependencies>
