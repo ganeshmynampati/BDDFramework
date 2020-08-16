@@ -1,9 +1,11 @@
-						BUDGET UI AUTOMATED SUITE
+							BUDGET UI AUTOMATED SUITE
 
 OVERVIEW
+
 This repository consists of automated smoke scenario to hire a vehicle from Budget travels UI
 
 SCENARIO DESCRIPTION
+
 User browses through Budget GUI to hire a SUV for a week trip at lowest price
 
 SALIENT FEATURES OF AUTOMATION FRAMEWORK
