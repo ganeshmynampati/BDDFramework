@@ -17,16 +17,21 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 public class TestUtils extends TestBase {
 
 	public long webelementWaitTime;
 
+	private static org.slf4j.Logger log = LoggerFactory.getLogger(TestUtils.class);
+
 	public synchronized void launchURL() {
 		try {
 			driver.get(ReadProperty.getProp("url"));
+			log.info("Launched Browser Succesfully");
 		} catch (Exception e) {
+			log.error("Browser launch is unsuccesful");
 			e.printStackTrace();
 		}
 	}
@@ -36,7 +41,9 @@ public class TestUtils extends TestBase {
 			waitForElementToBeClickable(element);
 			scrollIntoView(element);
 			element.clear();
+			log.info("Element content is cleared");
 		} catch (Exception e) {
+			log.error("Error in clearing element content");
 			e.printStackTrace();
 		}
 	}
@@ -44,9 +51,10 @@ public class TestUtils extends TestBase {
 	public synchronized void sendKeys(WebElement element, String value) {
 		try {
 			waitForElementToBeClickable(element);
-			// scrollIntoView(element);
 			element.sendKeys(value);
+			log.info("Entered text");
 		} catch (Exception e) {
+			log.error("Error in entering the text");
 			e.printStackTrace();
 		}
 	}
@@ -55,7 +63,9 @@ public class TestUtils extends TestBase {
 		try {
 			((JavascriptExecutor) driver)
 					.executeScript("document.getElementById('" + attribute + "').value='" + value + "'");
+			log.info("Entered text using javascript");
 		} catch (Exception e) {
+			log.error("Error in entering the text using javascript");
 			e.printStackTrace();
 		}
 	}
@@ -65,7 +75,9 @@ public class TestUtils extends TestBase {
 			waitForElementToBeClickable(element);
 			scrollIntoView(element);
 			element.click();
+			log.info("Clicked element");
 		} catch (Exception e) {
+			log.error("Error in clicking the element");
 			e.printStackTrace();
 		}
 	}
@@ -75,7 +87,9 @@ public class TestUtils extends TestBase {
 			waitForElementToBeClickable(element);
 			scrollIntoView(element);
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+			log.info("JS click succesful for the element");
 		} catch (Exception e) {
+			log.error("Unsuccesful JS Click");
 			e.printStackTrace();
 		}
 	}
@@ -85,6 +99,7 @@ public class TestUtils extends TestBase {
 		waitForElementToBeVisible(element);
 		scrollIntoView(element);
 		value = element.getText();
+		log.info("Text fetched from from the element");
 		return value;
 	}
 
@@ -94,7 +109,9 @@ public class TestUtils extends TestBase {
 			scrollIntoView(element);
 			Actions action = new Actions(driver);
 			action.moveToElement(element).build().perform();
+			log.info("Moved to element");
 		} catch (Exception e) {
+			log.error("Error in moving to element");
 			e.printStackTrace();
 		}
 	}
@@ -105,7 +122,9 @@ public class TestUtils extends TestBase {
 			scrollIntoView(element);
 			Actions action = new Actions(driver);
 			action.moveToElement(element).click().build().perform();
+			log.info("Moved and clicked element");
 		} catch (Exception e) {
+			log.error("Error in moving and clicking the element");
 			e.printStackTrace();
 		}
 	}
@@ -143,13 +162,16 @@ public class TestUtils extends TestBase {
 	public synchronized void scrollIntoView(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", element);
+		log.info("Scrolled into element");
 	}
 
 	public synchronized void clickDropDown(WebElement element) {
 		try {
 			moveToElement(element);
 			click(element);
+			log.info("Clicked dropdown element" + " " + element + " " + "succesfully");
 		} catch (Exception e) {
+			log.error("Error in clicking dropdown element");
 			e.printStackTrace();
 		}
 	}
@@ -162,7 +184,9 @@ public class TestUtils extends TestBase {
 			select.selectByValue(value);
 			String text = select.getFirstSelectedOption().getAttribute("value");
 			Assert.assertEquals(value, text, "Expected value is: " + value + " and an actual value is: " + text);
+			log.info("Selected value from dropdown");
 		} catch (WebDriverException exp) {
+			log.error("Error in selecting dropdown value");
 		}
 	}
 
@@ -174,7 +198,9 @@ public class TestUtils extends TestBase {
 			select.selectByVisibleText(value);
 			String text = select.getFirstSelectedOption().getText();
 			Assert.assertEquals(value, text, "Expected value is: " + value + " and an actual value is: " + text);
+			log.info("Selected text from dropdown");
 		} catch (WebDriverException exp) {
+			log.error("Error in selecting dropdown text");
 		}
 	}
 
@@ -184,7 +210,9 @@ public class TestUtils extends TestBase {
 			scrollIntoView(element);
 			Select select = new Select(element);
 			select.selectByIndex(index);
+			log.info("Selected index from dropdown");
 		} catch (WebDriverException exp) {
+			log.error("Error in selecting dropdown index");
 		}
 
 	}
@@ -211,32 +239,9 @@ public class TestUtils extends TestBase {
 		Assert.assertTrue(testcondition);
 	}
 
-	public static String getCurrentTimestamp(String format) {
-		SimpleDateFormat formatter = new SimpleDateFormat(format);
-		Date date = new Date();
-		return formatter.format(date);
-	}
-
-	public static String getFutureDateByWeek(String dateFormat, int weekno) {
-		String futureDate = "";
-		LocalDate result = LocalDate.now().plus(weekno, ChronoUnit.WEEKS);
-		futureDate = DateTimeFormatter.ofPattern(dateFormat, Locale.ENGLISH).format(result);
-		return futureDate;
-	}
-
-	public static String reformatDate(String inputdate) throws ParseException {
-		DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-		Date d = format.parse(inputdate);
-		DateFormat format1 = new SimpleDateFormat("EEE, MMM dd");
-		String newDate = format1.format(d);
-		return newDate;
-	}
-
-	public static String get(String dateFormat, int weekno) {
-		String futureDate = "";
-		LocalDate result = LocalDate.now().plus(weekno, ChronoUnit.WEEKS);
-		futureDate = DateTimeFormatter.ofPattern(dateFormat, Locale.ENGLISH).format(result);
-		return futureDate;
+	public void pageScrollUp() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,-250)", "");
 	}
 
 }

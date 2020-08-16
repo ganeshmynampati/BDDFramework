@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-    <suite name="BDD Test Suite">
-  <test name="Advisor Dashboard" preserve-order="true">
-        <classes>
-         <class name="testrunner.TestRunner"/>
-        </classes>
-    </test>
+<suite name="Budget Travel-BDD Automated Test Suite">
+	<test name="Budget Travel" preserve-order="true">
+		<classes>
+			<class name="testrunner.TestRunner" />
+		</classes>
+	</test>
+	<listeners>
+		<listener class-name="listeners.TestListener"></listener>
+	</listeners>
 </suite>

@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <groupId>ru.yandex.qatools.allure</groupId>
-        <artifactId>allure-examples-parent</artifactId>
-        <version>1.0</version>
-    </parent>
-    
+		<groupId>ru.yandex.qatools.allure</groupId>
+		<artifactId>allure-examples-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+
 	<groupId>BudgetTravel</groupId>
 	<artifactId>BudgetTravel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -16,67 +17,64 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		 <allure.version>1.5.2</allure.version>
+		<allure.version>1.5.2</allure.version>
 		<aspectj.version>1.8.10</aspectj.version>
 		<activemq.version>5.15.6</activemq.version>
 		<karate.version>0.8.0.RC4</karate.version>
-   
+
 	</properties>
 
 	<dependencies>
-	
-		<!-- These are the allure dependencies -->	
-		<dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
-            <version>1.6.2</version>
-        </dependency>
-		<!-- These are the cucumber dependencies -->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>1.2.5</version>
 		</dependency>
 		<dependency>
-    <groupId>io.github.bonigarcia</groupId>
-    <artifactId>webdrivermanager</artifactId>
-    <version>4.1.0</version>
-    <scope>test</scope>
-</dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>4.1.0</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
-    <groupId>jakarta.xml.bind</groupId>
-    <artifactId>jakarta.xml.bind-api</artifactId>
-    <version>2.3.2</version>
-</dependency>
-<!-- Runtime, com.sun.xml.bind module -->
-<dependency>
-    <groupId>org.glassfish.jaxb</groupId>
-    <artifactId>jaxb-runtime</artifactId>
-    <version>2.3.2</version>
-</dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>4.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<!-- Runtime, com.sun.xml.bind module -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.2</version>
+		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>1.2.5</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-    <groupId>io.cucumber</groupId>
-    <artifactId>cucumber-java8</artifactId>
-    <version>6.2.2</version>
-    <scope>test</scope>
-</dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java8</artifactId>
+			<version>6.2.2</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
-  			<groupId>org.slf4j</groupId>
- 			 <artifactId>slf4j-simple</artifactId>
-  			<version>1.7.21</version>
-			</dependency>
-			
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
@@ -97,17 +95,17 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
-        </dependency>            
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>cucumber-reporting</artifactId>
-            <version>3.13.0</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>net.masterthought</groupId>
+			<artifactId>cucumber-reporting</artifactId>
+			<version>3.13.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -127,37 +125,17 @@
 						<!-- src/test/resources/testSuites/testng.xml -->
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					
-					<argLine>
-                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
-                </argLine>
-					
+
+
+
 				</configuration>
-				
-				<dependencies>
-							<dependency>
-			                    <groupId>org.aspectj</groupId>
-			                    <artifactId>aspectjweaver</artifactId>
-			                    <version>${aspectj.version}</version>
-			                </dependency>
-				</dependencies>
-				
+
+
+
 			</plugin>
-			
-			<!--Needed only to show reports locally. Run jetty:run and
-            open localhost:8080 to show the report-->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.10.v20150310</version>
-                <configuration>
-                    <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
-                    <stopKey>stop</stopKey>
-                    <stopPort>1234</stopPort>
-                </configuration>
-            </plugin>
-			
+
+
+
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
@@ -171,31 +149,33 @@
 						</goals>
 						<configuration>
 							<projectName>BDDFramework</projectName>  <!-- Replace with project name -->
-							<outputDirectory>target/cucumber-reports/advanced-reports</outputDirectory>
-							<cucumberOutput>target/cucumber-reports/CucumberTestReport.json</cucumberOutput>
+							<outputDirectory>target/cucumber-reports/advanced-reports
+							</outputDirectory>
+							<cucumberOutput>target/cucumber-reports/CucumberTestReport.json
+							</cucumberOutput>
 							<buildNumber>1</buildNumber>
 							<parallelTesting>false</parallelTesting>
 							<enableFlashCharts>false</enableFlashCharts>
 							<skippedFails>true</skippedFails>
 						</configuration>
-						
-				
-						
+
+
+
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-	
-			<reporting>
-		        <excludeDefaults>true</excludeDefaults>
-		        <plugins>
-		            <plugin>
-		                <groupId>ru.yandex.qatools.allure</groupId>
-		                <artifactId>allure-maven-plugin</artifactId>
-		                <version>2.5</version>
-		            </plugin>
-		        </plugins>
-		    </reporting>
-	
+
+	<reporting>
+		<excludeDefaults>true</excludeDefaults>
+		<plugins>
+			<plugin>
+				<groupId>ru.yandex.qatools.allure</groupId>
+				<artifactId>allure-maven-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
 </project>

@@ -92,8 +92,13 @@ public class ReservationsPage extends TestUtils {
 
 	@FindBy(how = How.XPATH, using = "//*[contains(@class,'destination')]/descendant::div[@class='day-time-info']")
 	public WebElement confirmReturnTime;
+	
+	@FindBy(how = How.XPATH, using = "//div[@ng-show='mode']/descendant::div[@class='vehicle-name']/parent::div")
+	public WebElement finalVehicleInfo;
+	
+	
 
-	@FindBy(how = How.XPATH, using = "//*[@ng-show='mode']/descendant::div[@class='vehicle-name']")
+	@FindBy(how = How.XPATH, using = "//div[@ng-show='mode']/descendant::div[@class='vehicle-name']")
 	public WebElement confirmSUVGroup;
 
 	@FindBy(how = How.XPATH, using = "//*[@ng-show='mode']/descendant::div[@class='vehicle-info']/span")

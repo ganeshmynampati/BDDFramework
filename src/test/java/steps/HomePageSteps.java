@@ -1,12 +1,13 @@
 package steps;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import pageobjects.HomePage;
+import utils.DateUtils;
 import utils.ReadProperty;
 
 public class HomePageSteps extends HomePage {
@@ -25,15 +26,17 @@ public class HomePageSteps extends HomePage {
 		Assert.assertTrue(isElementDisplayed(budgetHeader));
 	}
 
-	public void enterPickUpLocation(String keyword, String location) throws InterruptedException {
+	public void enterPickUpLocation(String keyword, String location) throws InterruptedException {	
 		sendKeys(pickupLocation, keyword);
 		waitForElementToBeClickable(pickupDropDownOptions);
 		selectFromList(pickupDropDownValues, location, optionToSelect);
+		pageScrollUp();
 	}
 
 	public void enterPickUpDate() {
 		clear(pickupDate);
-		sendKeys(pickupDate, getFutureDateByWeek("MM/dd/YYYY", 1));
+		pageScrollUp();
+		sendKeys(pickupDate, DateUtils.getFutureDateByWeek("MM/dd/YYYY", 1));
 	}
 
 	public void selectPickUpTime() {
@@ -42,7 +45,7 @@ public class HomePageSteps extends HomePage {
 
 	public void enterDropDate() {
 		clear(dropDate);
-		sendKeys(dropDate, getFutureDateByWeek("MM/dd/YYYY", 2));
+		sendKeys(dropDate, DateUtils.getFutureDateByWeek("MM/dd/YYYY", 2));
 	}
 
 	public void selectDropTime() {
