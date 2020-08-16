@@ -6,7 +6,4 @@
 			<class name="testrunner.TestRunner" />
 		</classes>
 	</test>
-	<listeners>
-		<listener class-name="listeners.TestListener"></listener>
-	</listeners>
 </suite>

@@ -37,11 +37,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.aventstack</groupId>
-			<artifactId>extentreports</artifactId>
-			<version>4.0.6</version>
-		</dependency>
-		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
 			<version>2.3.2</version>
@@ -103,11 +98,15 @@
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-reporting</artifactId>
-			<version>3.13.0</version>
+			<version>3.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-jvm-deps</artifactId>
+			<version>1.0.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -125,21 +124,12 @@
 						<!-- src/test/resources/testSuites/testng.xml -->
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
-
-
-
 				</configuration>
-
-
-
 			</plugin>
-
-
-
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
-				<version>3.8.0</version>
+				<version>3.15.0</version>
 				<executions>
 					<execution>
 						<id>execution</id>
@@ -148,25 +138,17 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<projectName>BDDFramework</projectName>  <!-- Replace with project name -->
-							<outputDirectory>target/cucumber-reports/advanced-reports
-							</outputDirectory>
-							<cucumberOutput>target/cucumber-reports/CucumberTestReport.json
-							</cucumberOutput>
+							<projectName>MyProjectName</projectName>  <!-- Replace with project name -->
+							<outputDirectory>target/cucumber-reports/advanced-reports</outputDirectory>
+							<cucumberOutput>target/cucumber-reports/CucumberTestReport.json</cucumberOutput>
 							<buildNumber>1</buildNumber>
 							<parallelTesting>false</parallelTesting>
-							<enableFlashCharts>false</enableFlashCharts>
-							<skippedFails>true</skippedFails>
 						</configuration>
-
-
-
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 	<reporting>
 		<excludeDefaults>true</excludeDefaults>
 		<plugins>
@@ -177,5 +159,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
 </project>
