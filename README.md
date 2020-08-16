@@ -1,4 +1,4 @@
-								BUDGET UI AUTOMATED SUITE
+						BUDGET UI AUTOMATED SUITE
 
 OVERVIEW
 This repository consists of automated smoke scenario to hire a vehicle from Budget travels UI
