@@ -7,14 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-
-import utils.TestBase;
 import utils.TestUtils;
 
-public class ReservationsPage extends TestUtils {
+public class ReservationsPage extends TestUtils{
 
 	public ReservationsPage(WebDriver driver) {
-		TestBase.driver = driver;
+		TestUtils.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -38,9 +36,6 @@ public class ReservationsPage extends TestUtils {
 
 	@FindBy(how = How.XPATH, using = "//a[text()[contains(.,'Return')]]/following::div[@class='day-time-info'][1]")
 	public WebElement returnTimeLabel;
-
-//	@FindBy(how = How.XPATH, using = "//*[@class='step2dtl']")
-//	public WebElement allVehiclesDropDown;
 
 	 @FindBy(how = How.XPATH, using ="//a[@id='res-vehicles-filter-by-vehicle-type']")
 	public WebElement allVehiclesDropDown;
@@ -95,8 +90,6 @@ public class ReservationsPage extends TestUtils {
 	
 	@FindBy(how = How.XPATH, using = "//div[@ng-show='mode']/descendant::div[@class='vehicle-name']/parent::div")
 	public WebElement finalVehicleInfo;
-	
-	
 
 	@FindBy(how = How.XPATH, using = "//div[@ng-show='mode']/descendant::div[@class='vehicle-name']")
 	public WebElement confirmSUVGroup;
@@ -117,35 +110,3 @@ public class ReservationsPage extends TestUtils {
 	public WebElement EstimatedTotal;
 
 }
-
-//span[contains(text(),'Small to Full Size')]/parent::div
-
-//*[@class='step2dtl']/descendant::a[text()='View Vehicle Information']
-
-//*[@class='available-car-facilities']
-
-//div[@class='available-car-facilities']/descendant::span[text()[contains(.,'4 Doors')]]
-
-//div[@class='available-car-facilities']/descendant::span[@class='four-door-feat']
-
-//span[text()[contains(.,'4 Doors')]]
-
-//span[text()[contains(.,'4 Doors')]]
-
-//*[@class='step2dtl']/descendant::span[@class='four-door-feat' and text()[contains(.,'4 Doors')]][1]
-
-//*[@class='step2dtl']/descendant::span[@class='four-seats-feat' and text()[contains(.,'5 seats')]][1]
-
-//*[@class='step2dtl']/descendant::p[contains(@class,'similar-car')][1]
-
-//*[@class='step2dtl']/descendant::p[@ng-bind='car.automaticCaption'][1]
-
-//*[contains(@class,'vehicle-container') and @ng-show='mode']/descendant::div[@class='vehicle-info']/span
-
-//*[contains(@class,'vehicle-container') and @ng-show='mode']/descendant::div[contains(@ng-bind,'Transmission')]
-
-//div[@class='optBaseRateRow']/span/span[2]
-
-//div[@class='optTaxesRow']/span/span[2]
-
-//div[contains(@class,'optEstimatedTotalRow')]/span/span[2]

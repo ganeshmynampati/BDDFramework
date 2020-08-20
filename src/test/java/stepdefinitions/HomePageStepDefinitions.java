@@ -1,13 +1,14 @@
 package stepdefinitions;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import steps.HomePageSteps;
-import utils.TestBase;
+import utils.DriverContext;
 
-public class HomePageStepDefinitions extends TestBase {
 
-	HomePageSteps homepage = new HomePageSteps(driver);
+public class HomePageStepDefinitions{
+
+	HomePageSteps homepage = new HomePageSteps(DriverContext.getDriver());
 
 	@Given("user is on budget application home page")
 	public void user_is_on_budget_application_home_page() {

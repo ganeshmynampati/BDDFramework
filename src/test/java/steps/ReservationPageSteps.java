@@ -9,7 +9,7 @@ import org.testng.Assert;
 import pageobjects.ReservationsPage;
 import utils.DateUtils;
 
-public class ReservationPageSteps extends ReservationsPage {
+public class ReservationPageSteps extends ReservationsPage{
 
 	public ReservationPageSteps(WebDriver driver) {
 		super(driver);
@@ -61,13 +61,9 @@ public class ReservationPageSteps extends ReservationsPage {
 			jseClick(viewVehicleInformation.get(i));
 			if (fourDoorVehicle.get(i).getText().contains(door) && fiveSeatsVehicle.get(i).getText().contains(seat)) {
 				groupName = suvGroup.get(i).getText();
-				System.out.println("Selected SUV Group Name is" + " " + groupName);
 				vehicleName = suvName.get(i).getText();
-				System.out.println("Selected SUV is" + " " + vehicleName);
 				transmode = transMode.get(i).getText();
-				System.out.println("Trans Mode is" + " " + transmode);
 				baseprice = basePrice.get(i).getText();
-				System.out.println("Base Price is" + " " + baseprice);
 				jseClick(payNowOption.get(i));
 				break;
 			}

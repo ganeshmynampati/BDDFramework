@@ -1,8 +1,14 @@
 package utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,7 +18,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-public class TestUtils extends TestBase {
+public class TestUtils {
+
+	public static WebDriver driver;
 
 	public long webelementWaitTime;
 
@@ -20,7 +28,7 @@ public class TestUtils extends TestBase {
 
 	public synchronized void launchURL() {
 		try {
-			driver.get(ReadProperty.getProp("url"));
+			DriverContext.getDriver().get(ReadProperty.getProp("url"));
 			log.info("Launched Browser Succesfully");
 		} catch (Exception e) {
 			log.error("Browser launch is unsuccesful");
@@ -53,7 +61,7 @@ public class TestUtils extends TestBase {
 
 	public synchronized void jseSendKeys(String attribute, String value) {
 		try {
-			((JavascriptExecutor) driver)
+			((JavascriptExecutor) DriverContext.getDriver())
 					.executeScript("document.getElementById('" + attribute + "').value='" + value + "'");
 			log.info("Entered text using javascript");
 		} catch (Exception e) {
@@ -78,7 +86,7 @@ public class TestUtils extends TestBase {
 		try {
 			waitForElementToBeClickable(element);
 			scrollIntoView(element);
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+			((JavascriptExecutor) DriverContext.getDriver()).executeScript("arguments[0].click();", element);
 			log.info("JS click succesful for the element");
 		} catch (Exception e) {
 			log.error("Unsuccesful JS Click");
@@ -99,7 +107,7 @@ public class TestUtils extends TestBase {
 		try {
 			waitForElementToBeVisible(element);
 			scrollIntoView(element);
-			Actions action = new Actions(driver);
+			Actions action = new Actions(DriverContext.getDriver());
 			action.moveToElement(element).build().perform();
 			log.info("Moved to element");
 		} catch (Exception e) {
@@ -112,7 +120,7 @@ public class TestUtils extends TestBase {
 		try {
 			waitForElementToBeVisible(element);
 			scrollIntoView(element);
-			Actions action = new Actions(driver);
+			Actions action = new Actions(DriverContext.getDriver());
 			action.moveToElement(element).click().build().perform();
 			log.info("Moved and clicked element");
 		} catch (Exception e) {
@@ -139,20 +147,20 @@ public class TestUtils extends TestBase {
 
 	public synchronized void waitForElementToBeVisible(WebElement element) {
 		webelementWaitTime = Long.parseLong(ReadProperty.getProp("webelementwait"));
-		WebDriverWait wait = new WebDriverWait(driver, webelementWaitTime);
+		WebDriverWait wait = new WebDriverWait(DriverContext.getDriver(), webelementWaitTime);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
 
 	public synchronized void waitForElementToBeClickable(WebElement element) {
 		webelementWaitTime = Long.parseLong(ReadProperty.getProp("webelementwait"));
-		WebDriverWait wait = new WebDriverWait(driver, webelementWaitTime);
+		WebDriverWait wait = new WebDriverWait(DriverContext.getDriver(), webelementWaitTime);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
 	}
 
 	public synchronized void scrollIntoView(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) DriverContext.getDriver();
 		js.executeScript("arguments[0].scrollIntoView();", element);
 		log.info("Scrolled into element");
 	}
@@ -212,7 +220,7 @@ public class TestUtils extends TestBase {
 	public static void selectFromList(List<WebElement> element, String value, List<WebElement> optionToClick) {
 		for (int i = 0; i < element.size(); i++) {
 			if (element.get(i).getText().contains(value)) {
-				Actions actions = new Actions(driver);
+				Actions actions = new Actions(DriverContext.getDriver());
 				actions.moveToElement(optionToClick.get(i)).click().build().perform();
 				break;
 			}
@@ -220,7 +228,7 @@ public class TestUtils extends TestBase {
 	}
 
 	public void assertPageTitle(String expected) {
-		Assert.assertEquals(driver.getTitle(), expected);
+		Assert.assertEquals(DriverContext.getDriver().getTitle(), expected);
 	}
 
 	public void assertPageText(WebElement element, String actualtext) {
@@ -232,8 +240,15 @@ public class TestUtils extends TestBase {
 	}
 
 	public void pageScrollUp() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) DriverContext.getDriver();
 		js.executeScript("window.scrollBy(0,-250)", "");
+	}
+
+	public static void takeScreenshot(String scenarioName, String status) throws IOException {
+		File scrFile = ((TakesScreenshot) DriverContext.getDriver()).getScreenshotAs(OutputType.FILE);
+		String currentDir = System.getProperty("user.dir");
+		FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + scenarioName + "_" + status + "_"
+				+ System.currentTimeMillis() + ".png"));
 	}
 
 }

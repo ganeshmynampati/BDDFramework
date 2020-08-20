@@ -1,32 +1,62 @@
 package utils;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.concurrent.TimeUnit;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class Hooks extends TestBase {
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
-	TestBase testBase;
+public class Hooks {
+
 	public Scenario scenario;
+	private WebDriver driver;
 
 	@Before
 	public void initializeTest(Scenario scenario) throws MalformedURLException {
-		testBase = new TestBase();
+
+		this.scenario = scenario;
+
 		String env = ReadProperty.getProp("environment");
 		String browser = ReadProperty.getProp("browser");
-		testBase.selectBrowser(env, browser);
-		this.scenario = scenario;
-		String scenarioname = scenario.getName();
-		String[] arrayScenarioName = scenarioname.split("-");
-		Testcaseid = arrayScenarioName[0];
-//		// System.out.println("testcaseid" + Testcaseid);
-		//Testcasedescription = arrayScenarioName[1];
+		if (env.equalsIgnoreCase("local")) {
+			if (browser.equalsIgnoreCase("chrome")) {
+				WebDriverManager.chromedriver().setup();
+				driver = new ChromeDriver();
+				driver.manage().window().maximize();
+			} else if (browser.equalsIgnoreCase("firefox")) {
+				WebDriverManager.firefoxdriver().setup();
+				driver = new FirefoxDriver();
+				driver.manage().window().maximize();
+			}
+		} else if (env.equalsIgnoreCase("sauce")) {
+			// Saucelabs configuration
+		}
+		DriverContext.addDriver(driver);
+		DriverContext.getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		DriverContext.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	@After
-	public void endTest(Scenario scenario) {
-		TestBase.driver.quit();
+	public void endTest(Scenario scenario) throws IOException {
+		if (scenario.isFailed()) {
+			try {
+				final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+				scenario.embed(screenshot, "image/png", scenario.getName());
+			} catch (WebDriverException e) {
+				e.printStackTrace();
+			}
+			DriverContext.getDriver().quit();
+		}
 	}
+
 }

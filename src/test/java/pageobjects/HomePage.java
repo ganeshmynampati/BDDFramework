@@ -7,13 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import utils.TestBase;
 import utils.TestUtils;
 
-public class HomePage extends TestUtils {
+public class HomePage extends TestUtils{
 
 	public HomePage(WebDriver driver) {
-		TestBase.driver = driver;
+		TestUtils.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

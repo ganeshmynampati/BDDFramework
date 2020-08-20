@@ -2,14 +2,15 @@ package stepdefinitions;
 
 import java.text.ParseException;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import steps.ReservationPageSteps;
-import utils.TestBase;
+import utils.DriverContext;
 
-public class ReservationsPageStepDefinitions extends TestBase {
 
-	ReservationPageSteps reservepage = new ReservationPageSteps(driver);
+public class ReservationsPageStepDefinitions{
+
+	ReservationPageSteps reservepage = new ReservationPageSteps(DriverContext.getDriver());
 
 	@When("^chooses lowest price SUV with \"([^\"]*)\" doors and \"([^\"]*)\" seats and click pay now option$")
 	public void chooses_lowest_price_SUV_with_doors_and_seats_and_click_pay_now_option(String doors, String seats)

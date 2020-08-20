@@ -5,6 +5,7 @@ import org.testng.Assert;
 
 import pageobjects.HomePage;
 import utils.DateUtils;
+import utils.DriverContext;
 import utils.ReadProperty;
 
 public class HomePageSteps extends HomePage {
@@ -51,7 +52,7 @@ public class HomePageSteps extends HomePage {
 
 	public ReservationPageSteps clickSelectMyCar() {
 		jseClick(selectCar);
-		return new ReservationPageSteps(driver);
+		return new ReservationPageSteps(DriverContext.getDriver());
 
 	}
 
