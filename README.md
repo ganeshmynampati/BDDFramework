@@ -1,4 +1,4 @@
-							BUDGET UI AUTOMATED SUITE
+						BUDGET UI AUTOMATED SUITE
 
 OVERVIEW
 
@@ -31,3 +31,8 @@ SALIENT FEATURES OF AUTOMATION FRAMEWORK
 15.	PAGE CHAINING CONCEPT is implemented to establish the concurrency between each page during page navigation.
 16.	DATA DRIVEN APPROACH - is achieved with the help of Scenario Outline concept of Cucumber. This feature would facilitate testing the scenario with multiple types of 
 	test data in parallel.
+17.	Supports PARALLEL EXECUTION of SCENARIOS using Cucumber TestNG inbuilt class
+18.	ON FAILURE SCREENSHOT for analysis in case of test failures.
+19.	SCREENSHOT STORAGE is embedded in report itself rather than having it in local directory. This enables memory saving.	
+20. 	Supports CROSS BROWSER TESTING on CHROME, FIREFOX and IE browsers.
+
