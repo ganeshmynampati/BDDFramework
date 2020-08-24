@@ -51,6 +51,9 @@ public class ReservationsPage extends TestUtils{
 
 	@FindBy(how = How.XPATH, using = "//*[@class='step2dtl']/descendant::a[text()='View Vehicle Information']")
 	public List<WebElement> viewVehicleInformation;
+	
+	@FindBy(how = How.XPATH, using = "//*[@class='step2dtl']/descendant::a[text()='Close Vehicle Information']")
+	public WebElement closeVehicleInformation;
 
 	@FindBy(how = How.XPATH, using = "//span[text()[contains(.,'4 Doors')]]")
 	public List<WebElement> fourDoorVehicle;
@@ -70,7 +73,7 @@ public class ReservationsPage extends TestUtils{
 	@FindBy(how = How.XPATH, using = "//*[@class='step2dtl']/descendant::price/span")
 	public List<WebElement> basePrice;
 
-	@FindBy(how = How.XPATH, using = "//*[@class='step2dtl']/descendant::a[@id='res-vehicles-pay-now']")
+	@FindBy(how = How.XPATH, using = "//*[@class='step2dtl']/descendant::a[@id='res-vehicles-pay-now'][1]")
 	public List<WebElement> payNowOption;
 
 	@FindBy(how = How.XPATH, using = "//section[contains(@class,'rental-summary')]")

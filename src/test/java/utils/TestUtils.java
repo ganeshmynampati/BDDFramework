@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -28,7 +29,7 @@ public class TestUtils {
 
 	public synchronized void launchURL() {
 		try {
-			DriverContext.getDriver().get(ReadProperty.getProp("url"));
+			DriverContext.getDriver().get(PropertyUtil.readprop("url"));
 			log.info("Launched Browser Succesfully");
 		} catch (Exception e) {
 			log.error("Browser launch is unsuccesful");
@@ -50,7 +51,7 @@ public class TestUtils {
 
 	public synchronized void sendKeys(WebElement element, String value) {
 		try {
-			waitForElementToBeClickable(element);
+			waitForElementToBeVisible(element);
 			element.sendKeys(value);
 			log.info("Entered text");
 		} catch (Exception e) {
@@ -84,7 +85,7 @@ public class TestUtils {
 
 	public void jseClick(WebElement element) {
 		try {
-			waitForElementToBeClickable(element);
+			waitForElementToBeVisible(element);
 			scrollIntoView(element);
 			((JavascriptExecutor) DriverContext.getDriver()).executeScript("arguments[0].click();", element);
 			log.info("JS click succesful for the element");
@@ -94,7 +95,7 @@ public class TestUtils {
 		}
 	}
 
-	public synchronized String getText(WebElement element) {
+	public synchronized String getText(WebElement element) throws NumberFormatException, IOException {
 		String value = null;
 		waitForElementToBeVisible(element);
 		scrollIntoView(element);
@@ -129,7 +130,7 @@ public class TestUtils {
 		}
 	}
 
-	public synchronized boolean isElementEnabled(WebElement element) {
+	public synchronized boolean isElementEnabled(WebElement element) throws NumberFormatException, IOException {
 		boolean isEnabled = false;
 		waitForElementToBeVisible(element);
 		scrollIntoView(element);
@@ -137,7 +138,7 @@ public class TestUtils {
 		return isEnabled;
 	}
 
-	public synchronized boolean isElementDisplayed(WebElement element) {
+	public synchronized boolean isElementDisplayed(WebElement element) throws NumberFormatException, IOException {
 		boolean isDisplayed = false;
 		waitForElementToBeVisible(element);
 		scrollIntoView(element);
@@ -145,15 +146,22 @@ public class TestUtils {
 		return isDisplayed;
 	}
 
-	public synchronized void waitForElementToBeVisible(WebElement element) {
-		webelementWaitTime = Long.parseLong(ReadProperty.getProp("webelementwait"));
+	public synchronized void waitForElementToBeVisible(WebElement element) throws NumberFormatException, IOException {
+		webelementWaitTime = Long.parseLong(PropertyUtil.readprop("webelementwait"));
 		WebDriverWait wait = new WebDriverWait(DriverContext.getDriver(), webelementWaitTime);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
+	
+	public synchronized void waitForElementPresence(String locator) throws NumberFormatException, IOException {
+		webelementWaitTime = Long.parseLong(PropertyUtil.readprop("webelementwait"));
+		WebDriverWait wait = new WebDriverWait(DriverContext.getDriver(), webelementWaitTime);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
 
-	public synchronized void waitForElementToBeClickable(WebElement element) {
-		webelementWaitTime = Long.parseLong(ReadProperty.getProp("webelementwait"));
+	}
+
+	public synchronized void waitForElementToBeClickable(WebElement element) throws NumberFormatException, IOException {
+		webelementWaitTime = Long.parseLong(PropertyUtil.readprop("webelementwait"));
 		WebDriverWait wait = new WebDriverWait(DriverContext.getDriver(), webelementWaitTime);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
@@ -176,7 +184,7 @@ public class TestUtils {
 		}
 	}
 
-	public void selectByValue(WebElement element, String value) {
+	public void selectByValue(WebElement element, String value) throws NumberFormatException, IOException {
 		try {
 			waitForElementToBeVisible(element);
 			scrollIntoView(element);
@@ -190,7 +198,7 @@ public class TestUtils {
 		}
 	}
 
-	public void selectByVisibleText(WebElement element, String value) {
+	public void selectByVisibleText(WebElement element, String value) throws NumberFormatException, IOException {
 		try {
 			waitForElementToBeVisible(element);
 			scrollIntoView(element);
@@ -204,7 +212,7 @@ public class TestUtils {
 		}
 	}
 
-	public void selectByIndex(WebElement element, int index) {
+	public void selectByIndex(WebElement element, int index) throws NumberFormatException, IOException {
 		try {
 			waitForElementToBeVisible(element);
 			scrollIntoView(element);

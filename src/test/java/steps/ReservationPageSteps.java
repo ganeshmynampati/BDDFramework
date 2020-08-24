@@ -1,15 +1,17 @@
 package steps;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import pageobjects.ReservationsPage;
-import utils.DateUtils;
+import utils.DateUtil;
 
-public class ReservationPageSteps extends ReservationsPage{
+public class ReservationPageSteps extends ReservationsPage {
 
 	public ReservationPageSteps(WebDriver driver) {
 		super(driver);
@@ -21,49 +23,48 @@ public class ReservationPageSteps extends ReservationsPage{
 	private String baseprice;
 	private static DecimalFormat df = new DecimalFormat("0.00");
 
-	public void validateReservationsPageHeaders() {
+	public void validateReservationsPageHeaders() throws NumberFormatException, IOException {
 		waitForElementToBeVisible(travelTimeLabel);
 		assertPageTitle("Reservations | Budget Car Rental");
 		assertTrueCheck(isElementDisplayed(pickUpLabel));
 		assertTrueCheck(isElementDisplayed(returnLabel));
 	}
 
-	public void validatePickUpReturnDetails() throws ParseException {
+	public void validatePickUpReturnDetails() throws ParseException, NumberFormatException, IOException {
 		waitForElementToBeVisible(pickUpLocLabel);
 		assertPageText(pickUpLocLabel, "Austin Bergstrom Intl Airport");
 
 		waitForElementToBeVisible(pickUpTimeLabel);
-		String reformattedDt = DateUtils.reformatDate(DateUtils.getFutureDateByWeek("MM/dd/YYYY", 1));
+		String reformattedDt = DateUtil.reformatDate(DateUtil.getFutureDateByWeek("MM/dd/YYYY", 1));
 		assertTrueCheck(pickUpTimeLabel.getText().contains(reformattedDt));
 		assertPageText(returnLocLabel, "Austin Bergstrom Intl Airport");
 
 		waitForElementToBeVisible(returnTimeLabel);
-		String reformattedDt2 = DateUtils.reformatDate(DateUtils.getFutureDateByWeek("MM/dd/YYYY", 2));
+		String reformattedDt2 = DateUtil.reformatDate(DateUtil.getFutureDateByWeek("MM/dd/YYYY", 2));
 		assertTrueCheck(returnTimeLabel.getText().contains(reformattedDt2));
 	}
 
 	public void selectSUVType() throws ParseException {
-		pageScrollUp();
 		jseClick(allVehiclesDropDown);
-		pageScrollUp();
 		jseClick(suvGroupOption);
 	}
 
 	public void sortSUVPrice() throws ParseException {
-		pageScrollUp();
 		jseClick(sortByDropDown);
-		pageScrollUp();
 		jseClick(lowToHighPriceOption);
 	}
 
-	public void validateAndSelectSUV(String door, String seat) throws ParseException, InterruptedException {
+	public void validateAndSelectSUV(String door, String seat) throws ParseException, InterruptedException, NumberFormatException, IOException {
 		for (int i = 0; i < viewVehicleInformation.size(); i++) {
-			jseClick(viewVehicleInformation.get(i));
+			
+			
+			jseClick(driver.findElements(By.xpath("//div[contains(@ng-click,'vm.vehicleInfo')]/img[@class='img-responsive']")).get(i));
 			if (fourDoorVehicle.get(i).getText().contains(door) && fiveSeatsVehicle.get(i).getText().contains(seat)) {
 				groupName = suvGroup.get(i).getText();
 				vehicleName = suvName.get(i).getText();
 				transmode = transMode.get(i).getText();
 				baseprice = basePrice.get(i).getText();
+				jseClick(driver.findElements(By.xpath("//div[contains(@ng-click,'vm.vehicleInfo')]/img[@class='img-responsive']")).get(i));
 				jseClick(payNowOption.get(i));
 				break;
 			}
@@ -71,25 +72,26 @@ public class ReservationPageSteps extends ReservationsPage{
 		}
 	}
 
-	public void confirmHireDuration() throws ParseException {
+	public void confirmHireDuration() throws ParseException, NumberFormatException, IOException {
 		waitForElementToBeVisible(rentalSummary);
 		assertPageText(confirmPickupLoc, "Austin Bergstrom Intl Airport");
 		waitForElementToBeVisible(confirmPickupTime);
-		String finalPickUpDt = DateUtils.reformatDate(DateUtils.getFutureDateByWeek("MM/dd/YYYY", 1));
+		String finalPickUpDt = DateUtil.reformatDate(DateUtil.getFutureDateByWeek("MM/dd/YYYY", 1));
 		assertTrueCheck(confirmPickupTime.getText().contains(finalPickUpDt));
 		assertPageText(confirmReturnLoc, "Austin Bergstrom Intl Airport");
 		waitForElementToBeVisible(confirmReturnTime);
-		String finalReturnDt = DateUtils.reformatDate(DateUtils.getFutureDateByWeek("MM/dd/YYYY", 2));
+		String finalReturnDt = DateUtil.reformatDate(DateUtil.getFutureDateByWeek("MM/dd/YYYY", 2));
 		assertTrueCheck(confirmReturnTime.getText().contains(finalReturnDt));
 	}
 
-	public void confirmSUVDetails() throws ParseException {
+	public void confirmSUVDetails() throws ParseException, NumberFormatException, IOException {
 		waitForElementToBeVisible(finalVehicleInfo);
 		assertPageText(confirmSUVGroup, groupName);
 		assertPageText(confirmSUVName, vehicleName);
 		assertPageText(confirmTransMode, transmode);
 		waitForElementToBeVisible(finalBaseRate);
-		jseClick(finalBaseRate);
+		jseClick(confirmSUVGroup);
+		waitForElementToBeVisible(finalBaseRate);
 		assertPageText(finalBaseRate, baseprice);
 	}
 

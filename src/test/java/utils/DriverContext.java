@@ -13,14 +13,6 @@ public class DriverContext {
     private static ThreadLocal<Scenario> scenarios = new ThreadLocal<>();
     private static List<Scenario> storedScenarios = new ArrayList<>();
 
-//    static {
-//        Runtime.getRuntime().addShutdownHook(new Thread(){
-//            public void run(){
-//                storedDrivers.stream().forEach(WebDriver::quit);
-//            }
-//        });
-//    }
-
     private DriverContext(){};
 
     public static WebDriver getDriver(){

@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.OutputType;
@@ -10,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -22,12 +22,11 @@ public class Hooks {
 	private WebDriver driver;
 
 	@Before
-	public void initializeTest(Scenario scenario) throws MalformedURLException {
+	public void initializeTest(Scenario scenario) throws IOException {
 
 		this.scenario = scenario;
-
-		String env = ReadProperty.getProp("environment");
-		String browser = ReadProperty.getProp("browser");
+		String env = PropertyUtil.readprop("environment");
+		String browser = PropertyUtil.readprop("browser");
 		if (env.equalsIgnoreCase("local")) {
 			if (browser.equalsIgnoreCase("chrome")) {
 				WebDriverManager.chromedriver().setup();
@@ -38,6 +37,11 @@ public class Hooks {
 				driver = new FirefoxDriver();
 				driver.manage().window().maximize();
 			}
+		} else if (browser.equalsIgnoreCase("ie")) {
+			WebDriverManager.iedriver().setup();
+			driver = new InternetExplorerDriver();
+			driver.manage().window().maximize();
+
 		} else if (env.equalsIgnoreCase("sauce")) {
 			// Saucelabs configuration
 		}

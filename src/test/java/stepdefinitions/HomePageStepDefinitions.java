@@ -1,5 +1,7 @@
 package stepdefinitions;
 
+import java.io.IOException;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import steps.HomePageSteps;
@@ -11,7 +13,7 @@ public class HomePageStepDefinitions{
 	HomePageSteps homepage = new HomePageSteps(DriverContext.getDriver());
 
 	@Given("user is on budget application home page")
-	public void user_is_on_budget_application_home_page() {
+	public void user_is_on_budget_application_home_page() throws NumberFormatException, IOException {
 		homepage.launchApplication();
 		homepage.validateHomePageHeader();
 	}

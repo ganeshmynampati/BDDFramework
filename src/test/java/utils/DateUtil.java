@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 
-public class DateUtils {
+public class DateUtil {
 	
 	public static String getcurrentdateandtime() {
 		String str = null;

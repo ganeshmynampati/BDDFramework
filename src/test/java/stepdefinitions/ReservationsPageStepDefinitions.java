@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import io.cucumber.java.en.Then;
@@ -24,7 +25,7 @@ public class ReservationsPageStepDefinitions{
 
 	@Then("user validates base rate, fees and taxes and estimated prepaid total succesfully")
 	public void user_validates_base_rate_fees_and_taxes_and_estimated_prepaid_total_succesfully()
-			throws ParseException {
+			throws ParseException, NumberFormatException, IOException {
 		reservepage.confirmHireDuration();
 		reservepage.confirmSUVDetails();
 		reservepage.calculatePrepaidEstimates();
