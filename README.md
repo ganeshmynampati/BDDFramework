@@ -35,4 +35,3 @@ SALIENT FEATURES OF AUTOMATION FRAMEWORK
 18.	ON FAILURE SCREENSHOT for analysis in case of test failures.
 19.	SCREENSHOT STORAGE is embedded in report itself rather than having it in local directory. This enables memory saving.	
 20. 	Supports CROSS BROWSER TESTING on CHROME, FIREFOX and IE browsers.
-
